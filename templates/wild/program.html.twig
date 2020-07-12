@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title %}All programs{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}
+
+    <h1>Toutes les séries de la table program : </h1>
+    
+    
+        <div>
+            <h2>{{ program.id }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
+            <p>{{ program.summary }}</p>
+        </div>
+    
+        {% if seasons == "" %}
+        <p>Aucune saison selectionnée</p>
+            {% else %}
+                {% for season in seasons %}
+                    <a href="{{ path('show_season', {'id':season.id} ) }}">{{ season.number }} </a>
+
+
+
+                {% endfor %}
+
+        {% endif %}
+        <br>
+
+    
+    <a href="{{ path('app_index') }}">
+        Retour à l'accueil
+    </a>
+
+
+
+{% endblock %}
