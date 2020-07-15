@@ -11,6 +11,11 @@ use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\ProgramSearchType;
+use App\Form\CategoryType;
+
+
 
 class WildController extends AbstractController
 {
@@ -27,9 +32,22 @@ class WildController extends AbstractController
                 'No program found in program\'s table.'
             );
         }
+
+        $form = $this->createForm(
+            ProgramSearchType::class,
+            null,
+            ['method' => Request::METHOD_GET]
+
+        );
+
+
+
         return $this->render('wild/index.html.twig', [
             'programs' => $programs,
+            'form' => $form->createView(),
+
         ]);
+
     }
 
     /**
